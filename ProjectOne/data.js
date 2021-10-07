@@ -14,7 +14,7 @@ var selectInfo = {
     {
       "key": "Xbox One",
       "options": ["Series S", "Series X"],
-      "description": "Select a variety of Xobox One"
+      "description": "Select a variety of Xbox One"
     },
     {
       "key": "PlayStation",
