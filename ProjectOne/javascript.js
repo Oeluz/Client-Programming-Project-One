@@ -74,32 +74,40 @@ function addDefaultOption(select) {
 function displayResult() {
     const resultHeading = document.createElement("h3");
     resultHeading.textContent = "Here is your result!";
+    resultHeading.id = "result-heading";
     container.append(resultHeading);
 
     const resultText = document.createElement("p");
+    resultText.id = "result-text"
     resultText.textContent = selections[2] + " " + selections[0] + " " + selections[1];
     container.append(resultText);
-    
+
     const resetBtn = document.createElement("button");
     resetBtn.id = "reset-btn";
     resetBtn.textContent = "Reset";
     resetBtn.addEventListener("click", reset)
     container.append(resetBtn);
 
-    for (let i = 0; i <= maxDepth; i++){
+    for (let i = 0; i <= maxDepth; i++) {
         sessionStorage.setItem("result" + i, document.getElementById("select" + i).value);
     }
 }
 
-function reset(){
-    for(let i = 0; i <= maxDepth; i++)
-    {
+function reset() {
+    for (let i = 0; i <= maxDepth; i++) {
         sessionStorage.removeItem("result" + i);
         document.getElementById("select" + i).remove();
         document.getElementById("heading" + i).remove();
     }
 
     document.getElementById("reset-btn").remove();
+    document.getElementById("result-text").remove();
+    document.getElementById("result-heading").remove();
+
+    depth = 0;
+    currentChoice = selectInfo.choices[0];
+    selections = [];
+    displayCategory();
 }
 
 function displayCategory() {
@@ -172,13 +180,34 @@ function checkLocalStorage() {
 }
 
 function onStart() {
-    if (localStorage.getItem("username")){
+    if (localStorage.getItem("username")) {
         displayHeadUser();
     } else {
         displayHeadGuest();
+    }
+
+    if (sessionStorage.getItem("result1")) {
+        for (let i = 0; i <= maxDepth; i++) {
+            const listHeading = document.createElement("h2");
+            listHeading.id = "heading" + i;
+            listHeading.textContent = currentChoice.description;
+            container.append(listHeading);
+
+            const select = document.createElement("select");
+            select.id = "select" + i;
+            container.append(select);
+
+            let option = document.createElement("option");
+            option.value = sessionStorage.getItem("result" + i);
+            option.textContent = sessionStorage.getItem("result" + i);
+            select.append(option);
+            select.disabled = true;
+        }
+    }
+    else {
+        displayCategory();
     }
 }
 
 
 onStart();
-displayCategory();
