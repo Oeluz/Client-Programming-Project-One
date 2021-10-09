@@ -97,6 +97,7 @@ function displayResult() {
     // save to the sessionStorage with the choices
     for (let i = 0; i <= maxDepth; i++) {
         sessionStorage.setItem("result" + i, document.getElementById("select" + i).value);
+        sessionStorage.setItem("heading" + i, document.getElementById("heading" + i).textContent);
     }
 }
 
@@ -205,7 +206,7 @@ function onStart() {
         for (let i = 0; i <= maxDepth; i++) {
             const listHeading = document.createElement("h2");
             listHeading.id = "heading" + i;
-            listHeading.textContent = currentChoice.description;
+            listHeading.textContent = sessionStorage.getItem("heading" + i);
             container.append(listHeading);
 
             const select = document.createElement("select");
