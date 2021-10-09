@@ -1,3 +1,9 @@
+/**
+ * Author:      Zhencheng Chen
+ * Program:     Project One - Client Programming
+ * Date:        10/9/2021
+ */
+
 var depth = 2;
 
 var selectInfo = {

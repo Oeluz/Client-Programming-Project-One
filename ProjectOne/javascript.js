@@ -1,3 +1,10 @@
+/**
+ * Author:      Zhencheng Chen
+ * Program:     Project One - Client Programming
+ * Date:        10/9/2021
+ */
+
+
 let currentChoice = selectInfo.choices[0];
 var currentKey = currentChoice.key;
 
