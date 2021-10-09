@@ -78,21 +78,27 @@ function addDefaultOption(select) {
 
 // make the messages that display the result of the user's choices
 function displayResult() {
+    const resultScreen = document.createElement("div");
+    resultScreen.id = "result";
+    document.body.append(container);
+
     const resultHeading = document.createElement("h3");
     resultHeading.textContent = "Here is your result!";
     resultHeading.id = "result-heading";
-    container.append(resultHeading);
+    resultScreen.append(resultHeading);
 
     const resultText = document.createElement("p");
     resultText.id = "result-text"
     resultText.textContent = selections[2] + " " + selections[0] + " " + selections[1];
-    container.append(resultText);
+    resultScreen.append(resultText);
 
     const resetBtn = document.createElement("button");
     resetBtn.id = "reset-btn";
     resetBtn.textContent = "Reset";
     resetBtn.addEventListener("click", reset)
-    container.append(resetBtn);
+    resultScreen.append(resetBtn);
+
+    container.append(resultScreen);
 
     // save to the sessionStorage with the choices
     for (let i = 0; i <= maxDepth; i++) {
@@ -109,9 +115,7 @@ function reset() {
         document.getElementById("heading" + i).remove();
     }
 
-    document.getElementById("reset-btn").remove();
-    document.getElementById("result-text").remove();
-    document.getElementById("result-heading").remove();
+    document.getElementById("result").remove();
 
     depth = 0;
     currentChoice = selectInfo.choices[0];
@@ -130,7 +134,7 @@ function displayHeadGuest() {
     const form = document.createElement("form");
     form.id = "loginForm";
 
-    const nameLabel = document.createElement("label");
+    const nameLabel = document.createElement("p");
     nameLabel.id = "name-label";
     nameLabel.textContent = "Enter your name (not required)";
 
@@ -142,6 +146,7 @@ function displayHeadGuest() {
     const enterButton = document.createElement("input");
     enterButton.type = "submit";
     enterButton.value = "Enter";
+    enterButton.id = "loginBtn";
 
     form.appendChild(nameLabel);
     form.appendChild(nameInput);
@@ -225,11 +230,9 @@ function onStart() {
         selections[2] = sessionStorage.getItem("result2");
         displayResult();
 
-    }
-    else {
+    } else {
         displayCategory();
     }
 }
-
 
 onStart();
